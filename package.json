@@ -1,0 +1,27 @@
+{
+  "devDependencies": {
+    "@types/node": "^22.12.0",
+    "dotenv": "^16.4.7",
+    "nodemon": "^3.1.9",
+    "prisma": "^6.2.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.2.1",
+    "apollo-server": "^3.13.0",
+    "graphql": "^16.10.0"
+  },
+  "name": "graphql-prisma",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --watch src --exec ts-node src/index.ts --delay 1",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "description": ""
+}
