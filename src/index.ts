@@ -1,12 +1,16 @@
 import { ApolloServer } from "apollo-server";
 import { typeDefs } from "./schema";
 import { resolvers } from "./graphql/resolvers";
-import dotenv from "dotenv";
+import { createContext } from "./context";
 
-dotenv.config();
 
-console.log("Database URL:", process.env.DATABASE_URL);
-const server = new ApolloServer({ typeDefs, resolvers });
+
+const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    context: createContext
+});
+
 server.listen().then(({ url }) => {
     console.log(`🚀 Server ready at ${url}`);
 }).catch((error) => {
