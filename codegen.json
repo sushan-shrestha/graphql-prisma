@@ -1,0 +1,15 @@
+{
+  "overwrite": true,
+  "schema": "src/schema.ts",
+  "generates": {
+    "src/generated/schema.ts": {
+      "plugins": ["typescript", "typescript-resolvers"],
+      "config": {
+        "skipTypename": true,
+        "mappers": {
+          "User": "../types/index#UserEntity"
+        }
+      }
+    }
+  }
+}

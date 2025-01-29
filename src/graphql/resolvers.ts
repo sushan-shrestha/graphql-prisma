@@ -1,18 +1,18 @@
-import { Prisma, PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient, User } from "@prisma/client";
 import { generateToken, hashPassword, verifyPassword } from "../utils";
 import { conflictError, notFoundError, unAuthorizedError } from "../utils/errorHandler";
+import { Resolvers } from "../generated/schema";
+import { UserEntity } from "../types";
 
 
 // Define the types for resolver arguments
-export const resolvers = {
+export const resolvers: Resolvers = {
     Query: {
-        users: async (_: any, args: any, context: { prisma: PrismaClient, user: Prisma.UserMaxAggregateOutputType }) => {
-            const users = await context.prisma.user.findMany();
-            return users;
+        users: async (_: any, args: any, context: { prisma: PrismaClient, user: UserEntity }) => {
+            return await context.prisma.user.findMany()
         },
-        user: async (_: any, args: Prisma.UserWhereUniqueInput, context: { prisma: PrismaClient }) => {
-            const { id, ...rest } = args;
-            const user = await context.prisma.user.findFirst({ where: { id: Number(id), ...rest } });
+        user: async (_: any, { id }, context: { prisma: PrismaClient }) => {
+            const user = await context.prisma.user.findFirst({ where: { id: Number(id) } });
             if (!user) {
                 throw notFoundError("User not found")
             }
